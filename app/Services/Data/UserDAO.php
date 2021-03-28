@@ -1,0 +1,59 @@
+<?php
+
+/*
+ * Project Name: Milestone 1
+ * Version: 1.0
+ * Programmers: Brian Cantrell
+ * Date: 3/25/2021
+ */
+
+namespace App\Services\Data;
+
+use Illuminate\Support\Facades\DB;
+use App\Models\UserModel;
+
+class UserDAO {
+    
+    //Query users in the users table
+    public function retrieveUsers() {
+      return DB::table('users')->get();
+    }
+  
+    //Make sure no user with the same ID exisits 
+    public function userExists($id) {
+      $response = DB::table('users')->where('ID', $id)
+        ->count();
+    
+      if ($response > 0) {
+          return true;
+      } else {
+          return false;
+      }
+    }
+    
+    //Find user by user Id 
+    public function findById($id) {
+    	$response = DB::table('users')->where('ID', $id)->first();
+    	if(isset($response)) {
+    		return $response;
+    	} else {
+    		return NULL;
+    	}
+    }
+	
+    //Update user information
+	public function update(UserModel $user) {
+		$changes = DB::table('users')->where('ID', $user->getId())
+						->update(['EMAIL' => $user->getEmail(),
+						'FIRSTNAME' => $user->getFirstName(),
+						'LASTNAME' => $user->getLastName(),
+						'ROLE' => $user->getRole(),
+						'SUSPENDED' => $user->getSuspended()]);
+						return $changes > 0;
+    }
+    
+    //Update user information
+	public function delete($id) {
+		return DB::table('users')->where('ID', $id)->delete();
+	}
+}
