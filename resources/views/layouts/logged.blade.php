@@ -1,5 +1,5 @@
 <html lang="en">
-    @include('layouts.LoggedHeader')
+    @include('layouts.loggedHeader')
     <head>
         <title>@yield('title')</title>
     </head>
