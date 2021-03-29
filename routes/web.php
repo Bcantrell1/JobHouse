@@ -50,3 +50,14 @@ Route::get('/register', function () {
 Route::get('/home', function () {
     return view('home');
 });
+
+//Routes for user profile and edit
+Route::get('/myprofile', 'UserController@loadNewEdit');
+Route::get('/users/{id}/profile/edit', 'UserController@loadProfileEdit');
+Route::post('/users/{id}/profile/update', 'UserController@applyProfileEdit');
+
+//Routes for Admin actions
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/edit/{id}', 'AdminController@edit');
+Route::put('/admin/update/{id}', 'AdminController@update');
+Route::delete('/admin/delete/{id}', 'AdminController@delete');

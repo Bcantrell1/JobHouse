@@ -3,7 +3,6 @@
     <head>
         <title>@yield('title')</title>
     </head>
-    
     <body>
         <div>
             @yield('content')

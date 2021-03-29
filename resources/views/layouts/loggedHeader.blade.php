@@ -39,7 +39,7 @@
                         </li>
                         <!--Someway get this to change to the user's name when they log in-->
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('profile')}}">My Profile</a>
+                            <a class="nav-link" href="{{url('myprofile')}}">My Profile</a>
                         </li>
                     </ul>
                 </div>
