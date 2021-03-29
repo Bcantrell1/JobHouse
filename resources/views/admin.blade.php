@@ -49,16 +49,16 @@
                 <tbody>
                   @foreach($users as $row)
                   <tr>
-                    <td>{{ $row->ID }}</td>
+                    <td>{{ $row->id }}</td>
                     <td>{{ $row->FIRSTNAME . ' ' . $row->LASTNAME }}</td>
                     <td>{{ $row->EMAIL }}</td>
                     <td>{{ $row->ROLE }}</td>
                     <td>{{ $row->SUSPENDED == 1 ? 'BANNED' : 'Not Banned' }}</td>
                     <td>
-                      <a href="{{ url('/admin/edit', $row->ID) }}" class="btn btn-primary">Edit</a>
+                      <a href="{{ url('/admin/edit', $row->id) }}" class="btn btn-primary">Edit</a>
                     </td>
                     <td>
-                      <form action="{{ url('/admin/delete', $row->ID) }}" method="post">
+                      <form action="{{ url('/admin/delete', $row->id) }}" method="post">
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
                         <button type="submit" class="btn btn-danger">Remove</button>
