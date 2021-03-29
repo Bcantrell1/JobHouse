@@ -33,7 +33,7 @@ My Profile
                     <h6 class="text-muted card-subtitle mb-2">Education:</h6>
                     <p class="card-text">{{ $user->EDUCATION }}</p>
                 </div>
-                <a href="{{ url('/users', $user->ID) }}/profile/edit " class="btn btn-info">Edit</a>
+                <a href="{{ url('/users', $user->id) }}/profile/edit " class="btn btn-info">Edit</a>
             </div>
         </div>
     </div>
