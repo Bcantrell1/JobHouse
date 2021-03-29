@@ -37,7 +37,7 @@ class LoginController extends Controller
         if ($response->getSuccess()) {
             session_start();
             $userWithCVItems = $securityService->getUser($email);
-            $request->session()->put('userId', $userWithCVItems->ID);
+            $request->session()->put('userId', $userWithCVItems->id);
             //return if passed
             return view('home', ['user' => $userWithCVItems]);
         } else {
