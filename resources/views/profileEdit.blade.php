@@ -24,7 +24,7 @@
                         <h3>Edit User {{ $user->EMAIL }}</h3>
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('/users', $user->ID) }}/profile/update" method="POST">
+                        <form action="{{ url('/users', $user->id) }}/profile/update" method="POST">
                             <!-- here we update the button-->
                             {{ csrf_field() }}
                             <div class="row d-flex justify-content-center">
@@ -61,7 +61,7 @@
                                 </div>
                             </div>
                             <button type="Submit" class="btn btn-success">Submit</button>
-                            <a href="/myprofile" class="btn btn-danger">Cancel</a>
+                            <a href="{{ url('/myprofile') }}" class="btn btn-danger">Cancel</a>
                         </form>
                     </div>
 
