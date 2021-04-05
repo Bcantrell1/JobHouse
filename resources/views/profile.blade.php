@@ -13,6 +13,7 @@ My Profile
                 <div class="card-body" style="text-align: center;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4b8lTxKzkRKsS4G2HuGTIFRRWW_u2nco-bQ&usqp=CAU" style="height:280px; width:280px;">
                     <h4 class="card-title">{{ $user->FIRSTNAME . " " . $user->LASTNAME }}</h4>
                     <h6 class="text-muted card-subtitle mb-2">Position | Current Job</h6>
+                    <a href="{{ url('/users', $user->id) }}/resume" class="btn btn-info">Resume</a>
                 </div>
             </div>
         </div>
