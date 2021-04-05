@@ -37,9 +37,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('home')}}">Home</a>
                         </li>
-                        <!--Someway get this to change to the user's name when they log in-->
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('jobs')}}">Jobs</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{url('myprofile')}}">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{url('logout')}}">logout</a>
                         </li>
                     </ul>
                 </div>
