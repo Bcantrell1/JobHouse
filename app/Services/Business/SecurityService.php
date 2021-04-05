@@ -74,6 +74,7 @@ class SecurityService
         $p2 = $this->filter($registerRequest->getPasswordConfirm());
         $f = $this->filter($registerRequest->getFirstName());
         $l = $this->filter($registerRequest->getLastName());
+        $r = 'USER';
 
         //create register response
         $response = new ServiceResponse();
@@ -100,7 +101,8 @@ class SecurityService
                     'EMAIL' => $e,
                     'PASSWORD' => $p,
                     'FIRSTNAME' => $f,
-                    'LASTNAME' => $l
+                    'LASTNAME' => $l,
+                    'ROLE => $r
                 ]) !== null) {
                     $response->setSuccess(true);
                 } else {
