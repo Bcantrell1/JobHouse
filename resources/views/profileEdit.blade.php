@@ -54,10 +54,6 @@
                                         <label>Phone Number</label>
                                         <input type="text" name="pnumber" value="{{ $user->PNUMBER }}" class="form-control">
                                     </div>
-                                    <div class="form-group" style="text-align:left;">
-                                        <label>Education</label>
-                                        <input type="text" name="education" value="{{ $user->EDUCATION }}" class="form-control">
-                                    </div>
                                 </div>
                             </div>
                             <button type="Submit" class="btn btn-success">Submit</button>
