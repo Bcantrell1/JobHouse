@@ -30,8 +30,6 @@ My Profile
                     <p class="card-text">{{ $user->EMAIL }}</p>
                     <h6 class="text-muted card-subtitle mb-2">Phone Number:</h6>
                     <p class="card-text">{{ $user->PNUMBER }}</p>
-                    <h6 class="text-muted card-subtitle mb-2">Education:</h6>
-                    <p class="card-text">{{ $user->EDUCATION }}</p>
                 </div>
                 <a href="{{ url('/users', $user->id) }}/profile/edit " class="btn btn-info">Edit</a>
             </div>
