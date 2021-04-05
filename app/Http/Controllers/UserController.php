@@ -9,8 +9,88 @@ class UserController extends Controller
 {
     public function index($id) {
         $data = $this->loadData($id);
-        return view('cv', $data);
+        return view('resume', $data);
     }
+    
+    public function loadEdit($id) {
+        $data = $this->loadData($id);
+        return view('resumeEdit', $data);
+    }
+    
+    public function resumeAdd($id) {
+        $userDAO = new DAO('users');
+        $user = $userDAO->get($id);
+        return view('resumeItemAdd', ['user' => $user]);
+    }
+    
+    public function resumeEdit($id, $resumeItemId) {
+        $userDAO = new DAO('users');
+        $user = $userDAO->get($id);
+        $resumeDAO = new DAO('resume_items');
+        $resumeItem  = $resumeDAO->get($resumeItemId);
+        $data = [
+            'user' => $user,
+            'item' => $resumeItem
+        ];
+        return view('resumeEdit', $data);
+    }
+    public function addResumeItem(Request $request, $id) {
+        $resumeDAO = new DAO('resume_items');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $organization = $request->input('organization');
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $type = $request->input('type');
+        
+        $res = $resumeDAO->create([
+            'NAME' => $name,
+            'DESCRIPTION' => $description,
+            'ORGANIZATION' => $organization,
+            'START_DATE' => $startDate,
+            'END_DATE' => $endDate,
+            'TYPE' => $type,
+            'USER_ID' => $id
+        ]);
+        if($res) {
+            $data = $this->loadData($id);
+            return view('resumeEdit', $data);
+        } else {
+            $this->loadAdd($id);
+        }
+    }
+    public function updateResumeItem(Request $request, $id, $resumeItemId) {
+        $resumeDAO = new DAO('resume_items');
+        
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $organization = $request->input('organization');
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $type = $request->input('type');
+        
+        $res = $resumeDAO->update($resumeItemId, [
+            'NAME' => $name,
+            'DESCRIPTION' => $description,
+            'ORGANIZATION' => $organization,
+            'START_DATE' => $startDate,
+            'END_DATE' => $endDate,
+            'TYPE' => $type
+        ]);
+        
+        if($res) {
+            return $this->loadEdit($id);
+        }
+    }
+    public function deleteResumeItem($id, $resumeItemId) {
+        $resumeDAO = new DAO('resume_items');
+        $res = $resumeDAO->delete($resumeItemId);
+        if($res) {
+            $data = $this->loadData($id);
+            return view('resumeEdit', $data);
+        }
+    }
+    
     public function loadAllProfiles() {
         $userDAO = new DAO('users');
         $users = $userDAO->list();
@@ -34,7 +114,6 @@ class UserController extends Controller
         $joined = $request->input('joined');
         $country = $request->input('country');
         $pnumber = $request->input('pnumber');
-        $education = $request->input('education');
         $userDAO = new DAO('users');
         $res = $userDAO->update($id, [
             'FIRSTNAME' => $firstName,
@@ -43,7 +122,6 @@ class UserController extends Controller
             'JOINED' => $joined,
             'COUNTRY' => $country,
             'PNUMBER' => $pnumber,
-            'EDUCATION' => $education
         ]);
         if($res) {
             return redirect()->action([UserController::class, 'loadNewEdit']);
@@ -52,15 +130,38 @@ class UserController extends Controller
     public function loadData($id) {
         $userDAO = new DAO('users');
         $user = $userDAO->get($id);
+        $resumeItemsDAO = new DAO('resume_items');
+        $resumeItems  = $resumeItemsDAO->list([
+            'USER_ID' => $id
+        ]);
+            $talent = $resumeItems->filter(function($item) {
+            return $item->TYPE === 'TALENT';
+        });
+            $jobs = $resumeItems->filter(function($item) {
+            return $item->TYPE === 'JOB';
+        });
+            $education =$resumeItems->filter(function($item) {
+            return $item->TYPE === 'EDUCATION';
+        });     
         return [
             'user' => $user,
+            'talent' => $talent,
+            'jobs' => $jobs,
+            'education' => $education
         ];
     }
-    // New profile page makes use of the PHP session cookie.
+    
     public function loadNewEdit(Request $request) {
         $id = $request->session()->get('userId', null);
          if(!$id) return view('login');
         $data = $this->loadData($id);
         return view('profile', $data);
+    }
+    
+    public function logout(Request $request) {
+        session_start();
+        $request->session()->forget('userId');
+        session_destroy();
+        return view('index');
     }
 }

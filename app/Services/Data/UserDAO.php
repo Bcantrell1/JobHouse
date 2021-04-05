@@ -21,7 +21,7 @@ class UserDAO {
   
     //Make sure no user with the same ID exisits 
     public function userExists($id) {
-      $response = DB::table('users')->where('ID', $id)
+      $response = DB::table('users')->where('id', $id)
         ->count();
     
       if ($response > 0) {
@@ -33,7 +33,7 @@ class UserDAO {
     
     //Find user by user Id 
     public function findById($id) {
-    	$response = DB::table('users')->where('ID', $id)->first();
+    	$response = DB::table('users')->where('id', $id)->first();
     	if(isset($response)) {
     		return $response;
     	} else {
@@ -43,7 +43,7 @@ class UserDAO {
 	
     //Update user information
 	public function update(UserModel $user) {
-		$changes = DB::table('users')->where('ID', $user->getId())
+		$changes = DB::table('users')->where('id', $user->getId())
 						->update(['EMAIL' => $user->getEmail(),
 						'FIRSTNAME' => $user->getFirstName(),
 						'LASTNAME' => $user->getLastName(),
@@ -54,6 +54,6 @@ class UserDAO {
     
     //Update user information
 	public function delete($id) {
-		return DB::table('users')->where('ID', $id)->delete();
+		return DB::table('users')->where('id', $id)->delete();
 	}
 }

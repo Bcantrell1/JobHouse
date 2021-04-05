@@ -23,7 +23,7 @@ class DAO implements Stateful {
       return DB::table($this->tableName)->where($filter)->get();
     }
     public function get($id) {
-    	$response = DB::table($this->tableName)->where('ID', $id)->first();
+    	$response = DB::table($this->tableName)->where('id', $id)->first();
     	if(isset($response)) {
     		return $response;
     	} else {
@@ -36,11 +36,11 @@ class DAO implements Stateful {
 	}
 	public function update($id, $input) {
 	    $changes = DB::table($this->tableName)
-              ->where('ID', $id)
+              ->where('id', $id)
 							->update($input);
 		return $this->get($id);
     }
 	public function delete($id) {
-		return DB::table($this->tableName)->where('ID', $id)->delete();
+		return DB::table($this->tableName)->where('id', $id)->delete();
 	}
 }

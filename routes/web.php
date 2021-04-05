@@ -51,10 +51,29 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/logout', 'UserController@logout');
+
 //Routes for user profile and edit
 Route::get('/myprofile', 'UserController@loadNewEdit');
 Route::get('/users/{id}/profile/edit', 'UserController@loadProfileEdit');
 Route::post('/users/{id}/profile/update', 'UserController@applyProfileEdit');
+
+//Routes for Jobs
+Route::get('/jobs', 'JobController@index');
+Route::get('/jobs/create', 'JobController@loadCreate');
+Route::post('/jobs/add', 'JobController@createJob');
+Route::get('/jobs/{jobId}/edit', 'JobController@loadEdit');
+Route::post('/jobs/{jobId}/update', 'JobController@updateJob');
+Route::delete('/jobs/{jobId}/delete', 'JobController@deleteJob');
+
+//Routes for Resume
+Route::get('/users/{id}/resume', 'UserController@index');
+Route::get('/users/{id}/add', 'UserController@resumeAdd');
+Route::post('/users/{id}/apply', 'UserController@addResumeItem');
+Route::get('/users/{id}/edit', 'UserController@loadEdit');
+Route::post('/users/{id}/{resumeItemId}/apply', 'UserController@updateResumeItem');
+Route::get('/users/{id}/{resumeItemId}/edit', 'UserController@resumeEdit');
+Route::delete('/users/{id}/{resumeItemId}/delete', 'UserController@deleteResumeItem');
 
 //Routes for Admin actions
 Route::get('/admin', 'AdminController@index');
