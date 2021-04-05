@@ -102,7 +102,7 @@ class SecurityService
                     'PASSWORD' => $p,
                     'FIRSTNAME' => $f,
                     'LASTNAME' => $l,
-                    'ROLE => $r
+                    'ROLE' => $r
                 ]) !== null) {
                     $response->setSuccess(true);
                 } else {
