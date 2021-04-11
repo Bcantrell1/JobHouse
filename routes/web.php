@@ -51,6 +51,11 @@ Route::get('/home', function () {
     return view('home');
 });
 
+//Affinity group view
+Route::get('/groups/edit/create', function () {
+    return view('affinity-create');
+});
+
 Route::get('/logout', 'UserController@logout');
 
 //Routes for user profile and edit
@@ -80,3 +85,16 @@ Route::get('/admin', 'AdminController@index');
 Route::get('/admin/edit/{id}', 'AdminController@edit');
 Route::put('/admin/update/{id}', 'AdminController@update');
 Route::delete('/admin/delete/{id}', 'AdminController@delete');
+
+//Affinity Groups
+Route::get('/mygroups', 'UserController@loadGroupsByUser');
+Route::get('/groups', 'AffinityGroupsController@index');
+Route::get('/groups/edit', 'AffinityGroupsController@loadEdit');
+Route::get('/groups/edit/{id}/edit', 'AffinityGroupsController@loadGroupEditor');
+Route::post('/groups/create', 'AffinityGroupsController@createGroup');
+Route::post('/groups/edit/{id}/update', 'AffinityGroupsController@updateGroup');
+Route::delete('/groups/edit/{id}/delete', 'AffinityGroupsController@deleteGroup');
+
+//Affinity group addition / removals
+Route::post('/groups/{groupId}/{userId}/add', 'AffinityGroupsController@addUserToGroup');
+Route::delete('/groups/{groupId}/{userId}/delete', 'AffinityGroupsController@removeUserFromGroup');

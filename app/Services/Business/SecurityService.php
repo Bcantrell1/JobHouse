@@ -75,7 +75,6 @@ class SecurityService
         $f = $this->filter($registerRequest->getFirstName());
         $l = $this->filter($registerRequest->getLastName());
         $r = 'USER';
-
         //create register response
         $response = new ServiceResponse();
         $response->setSuccess(false);
