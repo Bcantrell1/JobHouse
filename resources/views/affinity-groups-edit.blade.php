@@ -25,7 +25,6 @@ Affinity Groups Edit
                                 <th>Name</th>
                                 <th>Description</th>
                                 <th>Type</th>
-                                <th>User Count</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </thead>
@@ -36,7 +35,6 @@ Affinity Groups Edit
                                     <td>{{ $row->NAME }}</td>
                                     <td>{{ $row->DESCRIPTION }}</td>
                                     <td>{{ $row->TYPE }}</td>
-                                    <td>N/A</td>
                                     <td>
                                         <a href="{{ url('/groups/edit',$row->id) }}/edit" class="btn btn-success">EDIT</a>
                                     </td>

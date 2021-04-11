@@ -43,7 +43,7 @@ class AffinityGroupsController extends Controller
         $data = [
             'item' => $group
         ];
-        return view('affinity-group-edit', $data);
+        return view('affinity-edit', $data);
     }
 
 
@@ -95,7 +95,7 @@ class AffinityGroupsController extends Controller
         if ($res) {
             return redirect()->action([AffinityGroupsController::class, 'loadEdit']);
         }
-        return redirect('affinity-group-create');
+        return redirect('affinity-create');
     }
 
     public function addUserToGroup(Request $request, $groupId, $userId)
