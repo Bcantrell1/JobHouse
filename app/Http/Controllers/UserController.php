@@ -7,23 +7,27 @@ use App\Services\Data\DAO;
 
 class UserController extends Controller
 {
-    public function index($id) {
+    public function index($id)
+    {
         $data = $this->loadData($id);
         return view('resume', $data);
     }
-    
-    public function loadEdit($id) {
+
+    public function loadEdit($id)
+    {
         $data = $this->loadData($id);
         return view('resumeEdit', $data);
     }
-    
-    public function resumeAdd($id) {
+
+    public function resumeAdd($id)
+    {
         $userDAO = new DAO('users');
         $user = $userDAO->get($id);
         return view('resumeItemAdd', ['user' => $user]);
     }
-    
-    public function resumeEdit($id, $resumeItemId) {
+
+    public function resumeEdit($id, $resumeItemId)
+    {
         $userDAO = new DAO('users');
         $user = $userDAO->get($id);
         $resumeDAO = new DAO('resume_items');
@@ -34,7 +38,8 @@ class UserController extends Controller
         ];
         return view('resumeEdit', $data);
     }
-    public function addResumeItem(Request $request, $id) {
+    public function addResumeItem(Request $request, $id)
+    {
         $resumeDAO = new DAO('resume_items');
         $name = $request->input('name');
         $description = $request->input('description');
@@ -42,7 +47,7 @@ class UserController extends Controller
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         $type = $request->input('type');
-        
+
         $res = $resumeDAO->create([
             'NAME' => $name,
             'DESCRIPTION' => $description,
@@ -52,23 +57,24 @@ class UserController extends Controller
             'TYPE' => $type,
             'USER_ID' => $id
         ]);
-        if($res) {
+        if ($res) {
             $data = $this->loadData($id);
             return view('resumeEdit', $data);
         } else {
             $this->loadAdd($id);
         }
     }
-    public function updateResumeItem(Request $request, $id, $resumeItemId) {
+    public function updateResumeItem(Request $request, $id, $resumeItemId)
+    {
         $resumeDAO = new DAO('resume_items');
-        
+
         $name = $request->input('name');
         $description = $request->input('description');
         $organization = $request->input('organization');
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
         $type = $request->input('type');
-        
+
         $res = $resumeDAO->update($resumeItemId, [
             'NAME' => $name,
             'DESCRIPTION' => $description,
@@ -77,37 +83,41 @@ class UserController extends Controller
             'END_DATE' => $endDate,
             'TYPE' => $type
         ]);
-        
-        if($res) {
+
+        if ($res) {
             return $this->loadEdit($id);
         }
     }
-    public function deleteResumeItem($id, $resumeItemId) {
+    public function deleteResumeItem($id, $resumeItemId)
+    {
         $resumeDAO = new DAO('resume_items');
         $res = $resumeDAO->delete($resumeItemId);
-        if($res) {
+        if ($res) {
             $data = $this->loadData($id);
             return view('resumeEdit', $data);
         }
     }
-    
-    public function loadAllProfiles() {
+
+    public function loadAllProfiles()
+    {
         $userDAO = new DAO('users');
         $users = $userDAO->list();
         return view('profiles', ['users' => $users]);
     }
 
-    public function loadProfileEdit(Request $request, $id) {
-         $loggedInId = $request->session()->get('userId', null);
-         if(!$loggedInId or ($loggedInId != $id)) return view('login');
-         $userDAO = new DAO('users');
-         $user = $userDAO->get($id);
-        if(isset($user)) {
+    public function loadProfileEdit(Request $request, $id)
+    {
+        $loggedInId = $request->session()->get('userId', null);
+        if (!$loggedInId or ($loggedInId != $id)) return view('login');
+        $userDAO = new DAO('users');
+        $user = $userDAO->get($id);
+        if (isset($user)) {
             return view('profileEdit')->with('user', $user);
         }
         return redirect('index');
     }
-    public function applyProfileEdit(Request $request, $id) {
+    public function applyProfileEdit(Request $request, $id)
+    {
         $firstName = $request->input('firstname');
         $lastName = $request->input('lastname');
         $email = $request->input('email');
@@ -123,26 +133,27 @@ class UserController extends Controller
             'COUNTRY' => $country,
             'PNUMBER' => $pnumber,
         ]);
-        if($res) {
+        if ($res) {
             return redirect()->action([UserController::class, 'loadNewEdit']);
         }
     }
-    public function loadData($id) {
+    public function loadData($id)
+    {
         $userDAO = new DAO('users');
         $user = $userDAO->get($id);
         $resumeItemsDAO = new DAO('resume_items');
         $resumeItems  = $resumeItemsDAO->list([
             'USER_ID' => $id
         ]);
-            $talent = $resumeItems->filter(function($item) {
+        $talent = $resumeItems->filter(function ($item) {
             return $item->TYPE === 'TALENT';
         });
-            $jobs = $resumeItems->filter(function($item) {
+        $jobs = $resumeItems->filter(function ($item) {
             return $item->TYPE === 'JOB';
         });
-            $education =$resumeItems->filter(function($item) {
+        $education = $resumeItems->filter(function ($item) {
             return $item->TYPE === 'EDUCATION';
-        });     
+        });
         return [
             'user' => $user,
             'talent' => $talent,
@@ -150,15 +161,33 @@ class UserController extends Controller
             'education' => $education
         ];
     }
-    
-    public function loadNewEdit(Request $request) {
+
+    public function loadGroupsByUser(Request $request) {
+        $groupsDAO = new DAO('affinity_groups');
         $id = $request->session()->get('userId', null);
-         if(!$id) return view('login');
+        if(!$id) return view('login');
+        $groupUsersDAO = new DAO('affinity_group_users');
+
+        $data = $groupsDAO->list();
+        $modifiedGroups = array_map(function ($el) use ($id, $groupUsersDAO) {
+            $usersGroups = $groupUsersDAO->list([['USER_ID', '=', $id], ['GROUP_ID', '=', $el->id]])->toArray();
+            $el->JOINED = count($usersGroups) > 0;
+            return $el;
+        }, $data->toArray());
+
+        return view('affinity-assign', ['groups' => $modifiedGroups, 'userId' => $id]);
+    }
+
+    public function loadNewEdit(Request $request)
+    {
+        $id = $request->session()->get('userId', null);
+        if (!$id) return view('login');
         $data = $this->loadData($id);
         return view('profile', $data);
     }
-    
-    public function logout(Request $request) {
+
+    public function logout(Request $request)
+    {
         session_start();
         $request->session()->forget('userId');
         session_destroy();
