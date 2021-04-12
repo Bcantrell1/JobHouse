@@ -8,21 +8,28 @@ use App\Services\Business\AdminService;
 
 class AdminController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
         $service = new AdminService();
         $users = $service->listUsers();
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
 
         return view('admin')->with('users', $users);
     }
-    public function edit($id) {
+    public function edit(Request $request,$id) {
         $service = new AdminService();
         $user = $service->getEditableUser($id);
         if(isset($user)) {
             return view('userEdit')->with('user', $user);
         }
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         return redirect('index');
     }
     public function update(Request $request, $id) {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
         $firstName = $request->input('firstname');
         $lastName = $request->input('lastname');
         $email = $request->input('email');
@@ -36,7 +43,9 @@ class AdminController extends Controller
         $result = $service->updateUser($user);
         return redirect('admin');
     }
-    public function delete($id) {
+    public function delete(Request $request, $id) {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
         $service = new AdminService();
         $result = $service->deleteUser($id);
         return redirect('admin');

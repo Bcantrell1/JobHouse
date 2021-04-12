@@ -66,6 +66,9 @@ class UserController extends Controller
     }
     public function updateResumeItem(Request $request, $id, $resumeItemId)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $resumeDAO = new DAO('resume_items');
 
         $name = $request->input('name');
@@ -98,8 +101,11 @@ class UserController extends Controller
         }
     }
 
-    public function loadAllProfiles()
+    public function loadAllProfiles(Request $request)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $userDAO = new DAO('users');
         $users = $userDAO->list();
         return view('profiles', ['users' => $users]);
@@ -107,6 +113,9 @@ class UserController extends Controller
 
     public function loadProfileEdit(Request $request, $id)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $loggedInId = $request->session()->get('userId', null);
         if (!$loggedInId or ($loggedInId != $id)) return view('login');
         $userDAO = new DAO('users');
@@ -118,6 +127,9 @@ class UserController extends Controller
     }
     public function applyProfileEdit(Request $request, $id)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $firstName = $request->input('firstname');
         $lastName = $request->input('lastname');
         $email = $request->input('email');
@@ -163,6 +175,9 @@ class UserController extends Controller
     }
 
     public function loadGroupsByUser(Request $request) {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $groupsDAO = new DAO('affinity_groups');
         $id = $request->session()->get('userId', null);
         if(!$id) return view('login');
@@ -178,10 +193,10 @@ class UserController extends Controller
         return view('affinity-assign', ['groups' => $modifiedGroups, 'userId' => $id]);
     }
 
-    public function loadNewEdit(Request $request)
+    public function tryProfile(Request $request)
     {
         $id = $request->session()->get('userId', null);
-        if (!$id) return view('login');
+        if (!$id) return view('login'); 
         $data = $this->loadData($id);
         return view('profile', $data);
     }

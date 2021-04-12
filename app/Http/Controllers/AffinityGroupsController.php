@@ -10,6 +10,7 @@ class AffinityGroupsController extends Controller
     public function index(Request $request)
     {
         $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
         if ($id) return redirect()->action([UserController::class, 'loadGroupsByUser']);
         $groupsDAO = new DAO('affinity_groups');
         $data = $groupsDAO->list();
@@ -29,15 +30,19 @@ class AffinityGroupsController extends Controller
         return $groups;
     }
 
-    public function loadEdit()
+    public function loadEdit(Request $request)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
         $groupsDAO = new DAO('affinity_groups');
         $data = $groupsDAO->list();
         return view('affinity-groups-edit', ['groups' => $data]);
     }
 
-    public function loadGroupEditor($groupId)
+    public function loadGroupEditor(Request $request, $groupId)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
         $groupsDAO = new DAO('affinity_groups');
         $group  = $groupsDAO->get($groupId);
         $data = [
@@ -80,6 +85,9 @@ class AffinityGroupsController extends Controller
 
     public function createGroup(Request $request)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $name = $request->input('name');
         $description = $request->input('description');
         $type = $request->input('type');
@@ -100,6 +108,9 @@ class AffinityGroupsController extends Controller
 
     public function addUserToGroup(Request $request, $groupId, $userId)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $groupUsersDAO = new DAO('affinity_group_users');
         $userDAO = new DAO('users');
         $groupsDAO = new DAO('affinity_groups');
@@ -131,6 +142,9 @@ class AffinityGroupsController extends Controller
     }
     public function removeUserFromGroup(Request $request, $groupId, $userId)
     {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+
         $groupUsersDAO = new DAO('affinity_group_users');
         $userDAO = new DAO('users');
         $groupsDAO = new DAO('affinity_groups');

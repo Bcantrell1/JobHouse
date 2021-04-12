@@ -59,7 +59,7 @@ Route::get('/groups/edit/create', function () {
 Route::get('/logout', 'UserController@logout');
 
 //Routes for user profile and edit
-Route::get('/myprofile', 'UserController@loadNewEdit');
+Route::get('/myprofile', 'UserController@tryProfile');
 Route::get('/users/{id}/profile/edit', 'UserController@loadProfileEdit');
 Route::post('/users/{id}/profile/update', 'UserController@applyProfileEdit');
 
