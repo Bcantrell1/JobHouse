@@ -38,7 +38,7 @@
             <div class="table-responsive">
               <table class="table">
                 <thead style="color: #F58A07;">
-                  <th>ID</th>
+                  <th>Id</th>
                   <th>Full Name</th>
                   <th>Email</th>
                   <th>Role</th>
@@ -49,7 +49,7 @@
                 <tbody>
                   @foreach($users as $row)
                   <tr>
-                    <td>{{ $row->ID }}</td>
+                    <td>{{ $row->id }}</td>
                     <td>{{ $row->FIRSTNAME . ' ' . $row->LASTNAME }}</td>
                     <td>{{ $row->EMAIL }}</td>
                     <td>{{ $row->ROLE }}</td>
