@@ -30,7 +30,7 @@
                     <h3>Edit User {{ $user->EMAIL }}</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/admin/update', $user->ID) }}" method="POST">
+                    <form action="{{ url('/admin/update', $user->id) }}" method="POST">
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
                         <div class="row d-flex justify-content-center">
