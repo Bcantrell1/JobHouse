@@ -12,7 +12,7 @@
 					<h3>Edit User {{ $user->EMAIL }}</h3>
 				</div>
 				<div class="card-body">
-					<form action="{{ url('/users', $user->id) }}/{{ $item->id }}/update" method="POST">
+					<form action="{{ url('/users', $user->id) }}/{{ $item->id }}/apply" method="POST">
 						{{ csrf_field() }}
 						<div class="col-12">
 							<div class="mb-3">
