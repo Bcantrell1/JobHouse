@@ -18,7 +18,7 @@ class UserController extends Controller
         $data = $this->loadData($id);
         return view('resumeEdit', $data);
     }
-
+ 
     public function resumeAdd($id)
     {
         $userDAO = new DAO('users');
@@ -36,7 +36,7 @@ class UserController extends Controller
             'user' => $user,
             'item' => $resumeItem
         ];
-        return view('resumeEdit', $data);
+        return view('resume-item-edit', $data);
     }
     public function addResumeItem(Request $request, $id)
     {
