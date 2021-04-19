@@ -71,6 +71,9 @@
             </div>
           </div>
         </div>
+        <div class="col-md-12 col-xs-12 text-center">
+                <a href="{{url('/groups/edit')}}" class="btn m-3" style="background-color:#5CFF7C;">Edit Groups</a>
+            </div>
       </div>
     </div>
   </div>

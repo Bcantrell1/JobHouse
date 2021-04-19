@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 class JobModel
 {
 
@@ -145,5 +144,4 @@ class JobModel
     {
         $this->author = $author;
     }
-
 }

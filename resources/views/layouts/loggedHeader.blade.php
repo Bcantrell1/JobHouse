@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--Stylesheets-->
+    <!--Stylesheets / Scripts-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
     </script>
 </head>
 
@@ -19,24 +19,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse mx-5" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{url('home')}}">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url('jobs')}}">Jobs</a>
-                    </li>
-                    <li class="nav-item">
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="{{url('myprofile')}}">My Profile</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="{{url('jobs')}}">Jobs</a>
+                    </li>
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="{{url('/groups')}}">Groups</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{url('/groups/edit')}}">Create Group</a>
-                    </li>
-                    <li class="nav-item">
+                    <li class="nav-item mx-2">
                         <a class="nav-link" href="{{url('logout')}}">logout</a>
                     </li>
                 </ul>
