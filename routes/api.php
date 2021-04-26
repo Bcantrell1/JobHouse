@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * Project Name: Milestone 6
+ * Version: 6.0
+ * Programmers: Brian Cantrell
+ * Date: 4/24/2021
+ */
+
 use Illuminate\Http\Request;
 
 /*
@@ -13,6 +20,6 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::get('/jobs', 'APIJobPostingController@index');
+Route::get('/jobs/search', 'APIJobPostingController@findSpecific');
+Route::get('/user/search', 'APIUserController@index');

@@ -18,18 +18,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <!-- 12 row -->
                 <div class="card">
                     <div class="card-header">
                         <h3>Edit User {{ $user->EMAIL }}</h3>
                     </div>
                     <div class="card-body">
                         <form action="{{ url('/users', $user->id) }}/profile/update" method="POST">
-                            <!-- here we update the button-->
                             {{ csrf_field() }}
                             <div class="row d-flex justify-content-center">
                                 <div class="col-md-8">
-                                    <!--col-md-8 means 8 row and form put into one row and updtate the button below-->
                                     <div class="form-group" style="text-align:left;">
                                         <label>First Name</label>
                                         <input type="text" name="firstname" value="{{ $user->FIRSTNAME }}" class="form-control">
@@ -42,11 +39,11 @@
                                         <label>Email</label>
                                         <input type="text" name="email" value="{{ $user->EMAIL }}" class="form-control">
                                     </div>
-                                     <div class="form-group" style="text-align:left;">
+                                    <div class="form-group" style="text-align:left;">
                                         <label>Joined</label>
                                         <input type="date" name="joined" value="{{ $user->JOINED }}" class="form-control">
                                     </div>
-                                     <div class="form-group" style="text-align:left;">
+                                    <div class="form-group" style="text-align:left;">
                                         <label>Country</label>
                                         <input type="text" name="country" value="{{ $user->COUNTRY }}" class="form-control">
                                     </div>

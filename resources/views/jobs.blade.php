@@ -36,7 +36,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
         @foreach($jobs as $row)
             <div class="row">
                 <div class="col">
@@ -56,16 +56,16 @@
                             </p>
                         </div>
                         <form action="{{ url('/jobs', $row->id) }}/edit" method="get">
-                        	{{ csrf_field() }}
+                            {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger mx-3">Edit</button>
-            			</form>
+            		    </form>
                     </div>
                 </div>
             </div>
         @endforeach()
         </div>
         @if(isset($selected) and isset($item))
-        <div class="col-md-6 col-lg-6 col-xl-6">
+        <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
         <div class="card mb-2">
             <h1 class="text-center ">Selected Job details</h1>
             </div>

@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * Project Name: Milestone 6
+ * Version: 6.0
+ * Programmers: Brian Cantrell
+ * Date: 4/24/2021
+ */
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -146,7 +153,7 @@ class UserController extends Controller
             'PNUMBER' => $pnumber,
         ]);
         if ($res) {
-            return redirect()->action([UserController::class, 'loadNewEdit']);
+            return redirect()->action([UserController::class, 'tryProfile']);
         }
     }
     public function loadData($id)

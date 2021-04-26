@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Project Name: Milestone 1
- * Version: 1.0
+ * Project Name: Milestone 6
+ * Version: 6.0
  * Programmers: Brian Cantrell
- * Date: 3/25/2021
+ * Date: 4/24/2021
  */
 
 namespace App\Models;

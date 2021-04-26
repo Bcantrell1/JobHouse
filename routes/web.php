@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Project Name: Milestone 1
- * Version: 1.0
+ * Project Name: Milestone 6
+ * Version: 6.0
  * Programmers: Brian Cantrell
- * Date: 3/25/2021
+ * Date: 4/24/2021
  */
 
 use Illuminate\Support\Facades\Route;
@@ -70,6 +70,8 @@ Route::post('/jobs/add', 'JobController@createJob');
 Route::get('/jobs/{jobId}/edit', 'JobController@loadEdit');
 Route::post('/jobs/{jobId}/update', 'JobController@updateJob');
 Route::delete('/jobs/{jobId}/delete', 'JobController@deleteJob');
+//API Route for job search.
+Route::get('/jobs/{keyword}', 'APIJobController@findSpecific');
 
 //Routes for Resume
 Route::get('/users/{id}/resume', 'UserController@index');
@@ -79,6 +81,8 @@ Route::get('/users/{id}/edit', 'UserController@loadEdit');
 Route::post('/users/{id}/{resumeItemId}/apply', 'UserController@updateResumeItem');
 Route::get('/users/{id}/{resumeItemId}/edit', 'UserController@resumeEdit');
 Route::delete('/users/{id}/{resumeItemId}/delete', 'UserController@deleteResumeItem');
+//API Route for user search.
+Route::get('/users/{email}', 'APIUserController@index');
 
 //Routes for Admin actions
 Route::get('/admin', 'AdminController@index');

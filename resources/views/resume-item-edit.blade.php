@@ -48,8 +48,8 @@
 							<div class="mb-3">
 								<label class="form-label">Type</label>
 								<select type="select" name="type" value="{{ $item->TYPE }}" class="form-control" required>
-									<option value="SKILL">SKILL</option>
-									<option value="JOB">JOB</option>
+									<option value="TALENT">Talent</option>
+									<option value="JOB">Job</option>
 									<option value="EDUCATION">Education</option>
 								</select>
 							</div>
