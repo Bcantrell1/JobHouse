@@ -39,7 +39,7 @@
                         <a class="nav-link" href="{{url('/groups')}}">Groups</a>
                     </li>
                     <li class="nav-item ms-5">
-                        <a class="btn btn-primary" style="background-color:#F58A07; border:none; href="{{url('logout')}}">logout</a>
+                        <a class="btn btn-primary" style="background-color:#F58A07; border:none;" href="{{url('logout')}}">logout</a>
                     </li>
                 </ul>
             </div>
