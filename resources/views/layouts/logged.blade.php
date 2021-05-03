@@ -7,7 +7,6 @@
         <div>
             @yield('content')
         </div>
-        <div class="container-fluid" style="margin: 1in;"></div>
      @include('layouts.footer')
     </body>
 </html>

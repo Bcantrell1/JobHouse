@@ -6,12 +6,12 @@ Job House | Home
 
 @section('content')
 
-<div class="container">
-        <div class="row">
+<div class="container ">
+        <div class="row text-center">
             <div class="col-lg-12">
                 <div class="container-fluid mt-5">
                     <div class="row mb-2">
-                        <div class="col-md-12">
+                        <div class="col-md-12 text-center">
                             <div>
                                 <h1>Welcome to JobHouse.com!</h1>
                                 <h3>The place for employers and employees to find the right fit!</h3>

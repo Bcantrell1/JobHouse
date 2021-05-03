@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Project Name: Milestone 6
- * Version: 6.0
+ * Project Name: Milestone 7
+ * Version: 7.0
  * Programmers: Brian Cantrell
- * Date: 4/24/2021
+ * Date: 4/30/2021
  */
 
 namespace App\Http\Controllers;
@@ -31,6 +31,15 @@ class UserController extends Controller
         $userDAO = new DAO('users');
         $user = $userDAO->get($id);
         return view('resumeItemAdd', ['user' => $user]);
+    }
+
+    public function dashboard(Request $request)
+    {
+        $id = $request->session()->get('userId', null);
+        if(!$id) return view('login');
+        $userDAO = new DAO('users');
+        $user = $userDAO->get($id);
+        return view('home', ['user' => $user]);
     }
 
     public function resumeEdit($id, $resumeItemId)
@@ -156,6 +165,43 @@ class UserController extends Controller
             return redirect()->action([UserController::class, 'tryProfile']);
         }
     }
+
+    public function loadProfileData($id) {
+        //User
+        $userDAO = new DAO('users');
+        $user = $userDAO->get($id);
+
+        //My Jobs
+        $jobItemsDAO = new DAO('job_postings');
+        $jobItems  = $jobItemsDAO->list([
+            'USER_ID' => $id
+        ]);
+        $jobs = $jobItems->filter(function ($job) {
+            return $job->USER_ID;
+        });
+
+        //My Groups
+        $groupsDAO = new DAO('affinity_groups');
+        $groupUsersDAO = new DAO('affinity_group_users');
+        $data = $groupsDAO->list();
+        $callback = function ($el) use ($id, $groupUsersDAO) {
+            $usersGroups = $groupUsersDAO->list(
+                [
+                    ['USER_ID', '=', $id], 
+                    ['GROUP_ID', '=', $el->id]
+                ])->toArray();
+            $el->JOINED = count($usersGroups) > 0;
+            return $el;
+        };
+        $modifiedGroups = array_map($callback, $data->toArray());
+
+        return [
+            'user' => $user,
+            'groups' => $modifiedGroups,
+            'jobs' => $jobs,
+        ];
+    }
+
     public function loadData($id)
     {
         $userDAO = new DAO('users');
@@ -204,7 +250,7 @@ class UserController extends Controller
     {
         $id = $request->session()->get('userId', null);
         if (!$id) return view('login'); 
-        $data = $this->loadData($id);
+        $data = $this->loadProfileData($id);
         return view('profile', $data);
     }
 

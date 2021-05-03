@@ -6,9 +6,9 @@ My Resume
 
 @section('content')
 
-<div class="container">
+<div class="container ">
     <div class="row">
-        <div class="col-md-6 col-xl-12">
+        <div class="col-md-12 my-auto">
             <div class="card my-5">
 				<h2 class="card-title text-center">{{ $user->FIRSTNAME . " " . $user->LASTNAME}}</h2>
                 <h6 class="card-subtitle text-muted text-center"> {{ $user->EMAIL }}</h6>

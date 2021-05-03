@@ -1,10 +1,10 @@
 <?php
 
 /*
- * Project Name: Milestone 1
- * Version: 1.0
+ * Project Name: Milestone 7
+ * Version: 7.0
  * Programmers: Brian Cantrell
- * Date: 3/25/2021
+ * Date: 4/30/2021
  */
 
 namespace App\Http\Controllers;

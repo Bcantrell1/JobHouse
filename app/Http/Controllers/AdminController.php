@@ -1,16 +1,17 @@
 <?php
 
 /*
- * Project Name: Milestone 6
- * Version: 6.0
+ * Project Name: Milestone 7
+ * Version: 7.0
  * Programmers: Brian Cantrell
- * Date: 4/24/2021
+ * Date: 4/30/2021
  */
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UpdateModel;
+use App\Services\Data\DAO;
 use App\Services\Business\AdminService;
 
 class AdminController extends Controller
@@ -19,8 +20,11 @@ class AdminController extends Controller
         $service = new AdminService();
         $users = $service->listUsers();
         $id = $request->session()->get('userId', null);
-        if(!$id) return view('login');
+        $userDAO = new DAO('users');
+        $user = $userDAO->get($id);
 
+        //Make sure the user is an admin to access the admin panel or return login.
+        if(!$id || strpos($user->ROLE, 'ADMIN') === false) return view('login');
         return view('admin')->with('users', $users);
     }
     public function edit(Request $request,$id) {

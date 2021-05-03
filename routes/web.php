@@ -47,9 +47,7 @@ Route::get('/register', function () {
 });
 
 // Logged in user's homepage
-Route::get('/home', function () {
-    return view('home');
-});
+Route::get('/home', 'UserController@dashboard');
 
 //Affinity group view
 Route::get('/groups/edit/create', function () {

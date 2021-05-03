@@ -42,7 +42,15 @@
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title"><a href="{{ url('/jobs') }}?selected={{ $row->id }}">{{ $row->NAME }}</a></h4>
+                            <div class="d-flex justify-content-between">
+                                <h4 class="card-title">
+                                    <a href="{{ url('/jobs') }}?selected={{ $row->id }}">{{ $row->NAME }}</a>
+                                </h4>
+                                <form action="{{ url('/jobs', $row->id) }}/edit" method="get">
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-danger mx-3">Edit</button>
+                                </form>
+                            </div>
                             <h6 class="text-muted card-subtitle mb-3">{{ $row->ORGANIZATION }}</h6>
                             <h6 class="text-muted card-subtitle mb-2">{{ $row->TYPE }}</h6>
                             <p class="card-text">Starts:
@@ -55,10 +63,6 @@
                                 ?>
                             </p>
                         </div>
-                        <form action="{{ url('/jobs', $row->id) }}/edit" method="get">
-                            {{ csrf_field() }}
-                            <button type="submit" class="btn btn-danger mx-3">Edit</button>
-            		    </form>
                     </div>
                 </div>
             </div>
@@ -66,7 +70,7 @@
         </div>
         @if(isset($selected) and isset($item))
         <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6">
-        <div class="card mb-2">
+            <div class="card mb-2">
             <h1 class="text-center ">Selected Job details</h1>
             </div>
             <div class="card">

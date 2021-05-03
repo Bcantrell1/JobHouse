@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<head> 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,10 +22,13 @@
             <div class="collapse navbar-collapse mx-5" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url('home')}}">Home</a>
+                        <a class="nav-link" style="color:#F58A07;" href="{{url('home')}}"><strong>Home</strong></a>
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="{{url('home')}}">Dashboard</a>
+                    </li>
                     <li class="nav-item mx-2">
                         <a class="nav-link" href="{{url('myprofile')}}">My Profile</a>
                     </li>
@@ -35,8 +38,8 @@
                     <li class="nav-item mx-2">
                         <a class="nav-link" href="{{url('/groups')}}">Groups</a>
                     </li>
-                    <li class="nav-item mx-2">
-                        <a class="nav-link" href="{{url('logout')}}">logout</a>
+                    <li class="nav-item ms-5">
+                        <a class="btn btn-primary" style="background-color:#F58A07; border:none; href="{{url('logout')}}">logout</a>
                     </li>
                 </ul>
             </div>

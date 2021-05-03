@@ -5,16 +5,17 @@
 @endsection()
 
 @section('content')
-<div class="container">
+<div class="container ">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-3">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header text-center">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                         {{ session('status') }}
                     </div>
                     @endif
+                    Job House Affinity Groups
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

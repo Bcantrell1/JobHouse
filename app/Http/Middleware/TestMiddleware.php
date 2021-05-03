@@ -1,12 +1,11 @@
 <?php
 
 /*
- * Project Name: Milestone 6
- * Version: 6.0
+ * Project Name: Milestone 7
+ * Version: 7.0
  * Programmers: Brian Cantrell
- * Date: 4/24/2021
+ * Date: 4/30/2021
  */
-
 namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Log;

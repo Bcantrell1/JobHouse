@@ -1,29 +1,37 @@
 <?php
 
 /*
- * Project Name: Milestone 6
- * Version: 6.0
+ * Project Name: Milestone 7
+ * Version: 7.0
  * Programmers: Brian Cantrell
- * Date: 4/24/2021
+ * Date: 4/30/2021
  */
+
 
 namespace App\Services\Utility;
 
-use App\Services\Utility\ILogger;
 use Illuminate\Support\Facades\Log;
 
-
-class MyLogger3 implements ILoggerService {
-	public function info($param) {
-		return Log::info($param);
-	}
-	public function debug($param) {
-		return Log::debug($param);
-	}
-	public function warning($param) {
-		return Log::warning($param);
-	}
-	public function error($param) {
-		return Log::error($param);
-	}
+class MyLogger3 implements ILoggerService
+{
+    function getLogger()
+    {
+        
+    }
+    public  function debug($message, $data=array())
+    {
+        Log::debug($message . (count($data) != 0 ? 'with data of ' . print_r($data, true) : ""));
+    }
+    public  function info($message, $data=array())
+    {
+        Log::info($message . (count($data) != 0 ? 'with data of ' . print_r($data, true) : ""));
+    }
+    public  function warning($message, $data=array())
+    {
+        Log::warning($message . (count($data) != 0 ? 'with data of ' . print_r($data, true) : ""));
+    }
+    public  function error($message, $data=array())
+    {
+        Log::error($message . (count($data) != 0 ? 'with data of ' . print_r($data, true) : ""));
+    }
 }

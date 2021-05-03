@@ -1,5 +1,5 @@
 <!--give some spacing before the footer-->
-<div class="container-fluid" style="margin: 1in;"></div>
+<div class="container-fluid" style="margin: 10px;"></div>
 <footer class="text-white mt-auto" style="background-color:#9BDCB4;">
     <div class="container">
         <div class="row text-center">
